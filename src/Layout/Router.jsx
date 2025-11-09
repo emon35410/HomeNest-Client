@@ -1,0 +1,43 @@
+import React from 'react';
+import { createBrowserRouter } from "react-router";
+import Root from './Root';
+import Home from '../Component/Home/Home';
+import AllProperties from '../Component/AllProperties/AllProperties';
+import AddProperties from '../Component/AddProperties/AddProperties';
+import MyProperties from '../Component/MyProperties/MyProperties';
+import MyRatings from '../Component/MyRatings/MyRatings';
+
+
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    Component:Root,
+    children:[
+        {
+            index:true,
+            Component:Home
+        },
+        {
+            path:"allproperties",
+            Component:AllProperties
+        },
+        {
+            path:"addproperties",
+            element:<AddProperties></AddProperties>
+        },
+        {
+            path:"myproperties",
+            element:<MyProperties></MyProperties>
+        },
+        {
+            path:"myratings",
+            element:<MyRatings></MyRatings>
+        }
+    ]
+  },
+  
+]);
+
+export default router;

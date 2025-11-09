@@ -1,0 +1,15 @@
+a.active {
+  background: linear-gradient(90deg, #632EE3 0%, #9F62F2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+a.active {
+  -webkit-text-fill-color: #ba238a91; /* solid purple */
+  font-weight: 600;
+  border-bottom: 2px solid #9F62F2;
+  background: none;
+}
