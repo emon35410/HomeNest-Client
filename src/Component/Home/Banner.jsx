@@ -7,7 +7,8 @@ const Banner = () => {
                 {/* Slide 1 */}
                 <div id="slide1" className="carousel-item relative w-full">
                     <img
-                        src="https://i.ibb.co/Zz0X7cLX/ricardo-resende-KDh-Ie2-W3-C-Y-unsplash.jpg"
+                    
+                        src="https://i.ibb.co/KxtP0spQ/darya-tryfanava-9lx-Nf-Vb-Z6-BE-unsplash.jpg"
                         alt="Slide 1"
                         className="w-full object-cover h-96 sm:h-[500px]"
                     />
@@ -58,7 +59,7 @@ const Banner = () => {
                 {/* Slide 4 */}
                 <div id="slide4" className="carousel-item relative w-full">
                     <img
-                        src="https://i.ibb.co/KxtP0spQ/darya-tryfanava-9lx-Nf-Vb-Z6-BE-unsplash.jpg"
+                        src="https://i.ibb.co/Zz0X7cLX/ricardo-resende-KDh-Ie2-W3-C-Y-unsplash.jpg"
                         alt="Slide 4"
                         className="w-full object-cover h-96 sm:h-[500px]"
                     />

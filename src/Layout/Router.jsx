@@ -11,33 +11,38 @@ import MyRatings from '../Component/MyRatings/MyRatings';
 
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    Component:Root,
-    children:[
-        {
-            index:true,
-            Component:Home
-        },
-        {
-            path:"allproperties",
-            Component:AllProperties
-        },
-        {
-            path:"addproperties",
-            element:<AddProperties></AddProperties>
-        },
-        {
-            path:"myproperties",
-            element:<MyProperties></MyProperties>
-        },
-        {
-            path:"myratings",
-            element:<MyRatings></MyRatings>
-        }
-    ]
-  },
-  
+    {
+        path: "/",
+        Component: Root,
+        children: [
+            {
+                index: true,
+                Component: Home
+            },
+            {
+                path: "allproperties",
+                loader: async () => {
+                    const res = await fetch("http://localhost:3000/homes");
+                    return res.json();
+                },
+
+                Component: AllProperties
+            },
+            {
+                path: "addproperties",
+                element: <AddProperties></AddProperties>
+            },
+            {
+                path: "myproperties",
+                element: <MyProperties></MyProperties>
+            },
+            {
+                path: "myratings",
+                element: <MyRatings></MyRatings>
+            }
+        ]
+    },
+
 ]);
 
 export default router;
