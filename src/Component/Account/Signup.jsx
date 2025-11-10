@@ -1,11 +1,24 @@
-import React, { useEffect } from 'react';
+import React, {  useContext, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
 import { Link } from 'react-router';
+import { AuthContext } from '../../Context/AuthContext';
+
 
 const Signup = () => {
+    const {signInGoogle} = useContext(AuthContext);
+
+    const handleGoogleSignIn = ()=>{
+        signInGoogle()
+        .then(result=>{
+            console.log(result.user)
+        })
+        .catch(error=>{
+            console.log(error)
+        })
+    }
     useEffect(() => {
         AOS.init({ duration: 800, once: true });
     }, []);
@@ -78,7 +91,7 @@ const Signup = () => {
 
                         <div className="mt-6 text-center">
                             <p className="text-gray-500 dark:text-gray-400 mb-2 text-sm">Or sign up with</p>
-                            <button className="flex hover:cursor-pointer items-center justify-center gap-2 w-full py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors font-medium shadow-sm">
+                            <button onClick={handleGoogleSignIn} className="flex hover:cursor-pointer items-center justify-center gap-2 w-full py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors font-medium shadow-sm">
                                 <svg
                                     aria-label="Google logo"
                                     width="20"

@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router';
 import { NavLink } from 'react-router';
 import "./Navbar.css"
+import { AuthContext } from '../../Context/AuthContext';
 
 const Navbar = () => {
-    const links =<>
-    <li><NavLink to="/">Home</NavLink></li>
-    <li><NavLink to="/allproperties">All Properties</NavLink></li>
-    <li><NavLink to="/addproperties">Add Properties</NavLink></li>
-    <li><NavLink to="/myproperties">My Properties</NavLink></li>
-    <li><NavLink to="/myratings">My Ratings</NavLink></li>
+
+    const { user } = useContext(AuthContext);
+    const links = <>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/allproperties">All Properties</NavLink></li>
+        {
+            user && <>
+                <li><NavLink to="/addproperties">Add Properties</NavLink></li>
+                <li><NavLink to="/myproperties">My Properties</NavLink></li>
+                <li><NavLink to="/myratings">My Ratings</NavLink></li>
+            </>
+        }
     </>
     return (
         <div>
@@ -22,7 +29,7 @@ const Navbar = () => {
                         <ul
                             tabIndex="-1"
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                           {links}
+                            {links}
                         </ul>
                     </div>
                     <a className="btn btn-ghost text-xl">HomeNest</a>
@@ -33,9 +40,40 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to="/login" className='mr-3 btn btn-outline btn-primary'>Login</Link>
-                    <Link to="/signup" className='btn btn-neutral'>Sign Up</Link>
+                    {
+                        user ? (
+                            <div className="dropdown dropdown-end ">
+                                <div tabIndex={0} role="button" className="w-20">
+                                    <img
+                                        className="rounded-full hover:cursor-pointer w-15 h-15 object-cover"
+                                        src={user.photoURL}
+                                        alt={user.displayName || "User"}
+                                    />
+                                </div>
+
+                                <ul
+                                    tabIndex="-1"
+                                    className="menu dropdown-content bg-base-100 rounded-box z-[100] mt-3 w-52 p-2 shadow"
+                                >
+                                    <li><h1 className="font-semibold">{user.displayName}</h1></li>
+                                    <li><h1 className="text-sm text-gray-500">{user.email}</h1></li>
+                                    <li>
+                                        <Link to="/login" className="btn btn-outline btn-primary mt-2">
+                                            Log Out
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        ) : (
+                            <>
+                                <Link to="/login" className='mr-3 btn btn-outline btn-primary'>Login</Link>
+                                <Link to="/signup" className='btn btn-neutral'>Sign Up</Link>
+                            </>
+                        )
+                    }
                 </div>
+
             </div>
         </div>
     );
