@@ -7,6 +7,9 @@ import AddProperties from '../Component/AddProperties/AddProperties';
 import MyProperties from '../Component/MyProperties/MyProperties';
 import MyRatings from '../Component/MyRatings/MyRatings';
 import PropertiesDetails from '../Component/PropertiesDetails/PropertiesDetails';
+import Login from '../Component/Account/Login';
+import ErrorPage from '../Component/ErrorPage/ErrorPage';
+import Signup from '../Component/Account/Signup';
 
 
 
@@ -15,6 +18,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         Component: Root,
+        errorElement:<ErrorPage></ErrorPage>,
         children: [
             {
                 index: true,
@@ -48,6 +52,14 @@ const router = createBrowserRouter([
             }
         ]
     },
+    {
+        path:"/login",
+        Component:Login
+    },
+    {
+        path:"/signup",
+        Component:Signup
+    }
 
 ]);
 

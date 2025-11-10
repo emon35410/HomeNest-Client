@@ -35,10 +35,10 @@ const PropertiesDetails = () => {
             <div  className="mt-8 grid md:grid-cols-3 gap-8">
                
                 <div data-aos="fade-right" className="md:col-span-2 space-y-6">
-                    <h1 className="text-4xl font-bold text-gray-900">{home.property_name}</h1>
-                    <p className="text-gray-500 text-lg">{home.location}</p>
+                    <h1 className="text-4xl font-bold ">{home.property_name}</h1>
+                    <p className=" text-lg">{home.location}</p>
 
-                    <div className="flex flex-wrap gap-6 mt-4 text-gray-700">
+                    <div className="flex flex-wrap gap-6 mt-4 ">
                         <div className="flex items-center gap-2">
                             <FaBed className="text-green-600" />
                             <span>{home.bedrooms} Bedrooms</span>
@@ -55,7 +55,7 @@ const PropertiesDetails = () => {
 
                     <div className="border-t border-gray-200 pt-6">
                         <h2 className="text-2xl font-semibold mb-2">About this Property</h2>
-                        <p className="text-gray-700 leading-relaxed">{home.short_description}</p>
+                        <p className="text-gray-500 leading-relaxed">{home.short_description}</p>
                     </div>
                 </div>
 
@@ -68,7 +68,7 @@ const PropertiesDetails = () => {
                             alt={home.seller_name}
                             className="w-28 h-28 object-cover rounded-full shadow-md border-4 border-gray-100"
                         />
-                        <h3 className="text-lg font-bold mt-3">{home.seller_name}</h3>
+                        <h3 className="text-lg text-gray-800 font-bold mt-3">{home.seller_name}</h3>
                         <div className="mt-2 flex flex-col gap-1 text-gray-600">
                             <p className="flex items-center gap-2 justify-center">
                                 <FaEnvelope /> {home.seller_email}
@@ -79,7 +79,7 @@ const PropertiesDetails = () => {
                         </div>
                     </div>
 
-                    <button className="mt-6 w-full bg-green-600 text-white py-2 rounded-xl hover:bg-green-700 transition">
+                    <button className="mt-6 w-full hover:cursor-pointer bg-green-600 text-white py-2 rounded-xl hover:bg-green-700 transition">
                         Contact Seller
                     </button>
                 </div>
