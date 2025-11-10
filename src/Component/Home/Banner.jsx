@@ -2,7 +2,7 @@ import React from 'react';
 
 const Banner = () => {
     return (
-        <div className="w-full max-w-4xl mx-auto">
+        <div data-aos="fade-right" className="w-full max-w-4xl mx-auto">
             <div className="carousel relative w-full rounded-lg overflow-hidden shadow-lg">
                 {/* Slide 1 */}
                 <div id="slide1" className="carousel-item relative w-full">

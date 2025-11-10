@@ -12,7 +12,7 @@ const RecentHomeCard = ({ recentHomePromise }) => {
             <h1 className='text-center text-4xl my-10 font-bold'>Our Recent Residence</h1>
             <div className='flex flex-wrap justify-center gap-6'>
                 {RecentHome.map(Home => (
-                    <div
+                    <div data-aos="fade-up"
                         key={Home.id}
                         className="w-[350px] h-[520px] rounded-2xl overflow-hidden shadow-xl bg-[#F5E9E0]"
                     >
@@ -25,7 +25,7 @@ const RecentHomeCard = ({ recentHomePromise }) => {
                         <div className="p-5">
                             {/* Category */}
                             <h1 className='text-center text-[#3D2A23] text-2xl font-semibold my-3'>
-                               { Home.property_name}
+                                {Home.property_name}
                             </h1>
 
                             {/* Location */}
@@ -51,12 +51,20 @@ const RecentHomeCard = ({ recentHomePromise }) => {
                                 Price: <span className="font-bold">${Home.price}</span>
                             </p>
                         </div>
-                       <div className='flex justify-center items-center'>
-                         <Link className='btn btn-wide btn-dash btn-primary'>View Details</Link>
-                       </div>
+                        <div className='flex justify-center items-center'>
+                            <Link to={`/homes/${Home._id}`} className='btn btn-wide btn-dash btn-primary'>View Details</Link>
+                        </div>
                     </div>
                 ))}
             </div>
+            <div className='my-5 flex items-center justify-center'>
+                <Link to="/allproperties" className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl 
+    bg-gradient-to-r from-green-500 via-blue-500 to-purple-600 
+    text-white border-none shadow-lg hover:scale-105 hover:shadow-xl transition duration-300">
+                    All Properties
+                </Link>
+            </div>
+
         </div>
     );
 };
