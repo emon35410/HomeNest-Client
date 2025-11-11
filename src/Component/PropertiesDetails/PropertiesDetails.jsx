@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useLoaderData } from "react-router";
 import { FaBed, FaBath, FaRulerCombined, FaEnvelope, FaPhone } from "react-icons/fa";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import Swal from 'sweetalert2';
-import { useContext } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import Swal from "sweetalert2";
 import { AuthContext } from "../../Context/AuthContext";
 
 const PropertiesDetails = () => {
-
     const home = useLoaderData();
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
     const [isBought, setIsBought] = useState(false);
-
+    
+    useEffect(() => {
+        const bought = localStorage.getItem(`bought_${home._id}`);
+        if (bought === "true") {
+            setIsBought(true);
+        }
+    }, [home._id]);
 
     useEffect(() => {
         AOS.init({ duration: 800, once: true });
@@ -49,6 +53,7 @@ const PropertiesDetails = () => {
                     .then((data) => {
                         if (data.insertedId) {
                             setIsBought(true);
+                            localStorage.setItem(`bought_${home._id}`, "true"); 
                             Swal.fire({
                                 title: "Success!",
                                 text: "Property successfully added to your properties.",
@@ -69,7 +74,7 @@ const PropertiesDetails = () => {
 
     return (
         <div className="max-w-6xl mx-auto px-6 py-10">
-
+          
             <div data-aos="fade-left" className="relative rounded-2xl overflow-hidden shadow-xl">
                 <img
                     src={home.image}
@@ -109,21 +114,22 @@ const PropertiesDetails = () => {
                         <h2 className="text-2xl font-semibold mb-2">About this Property</h2>
                         <p className="text-gray-500 leading-relaxed">{home.short_description}</p>
                     </div>
+
                     <div>
                         <button
                             onClick={handleBuyProperty}
-                            disabled={isBought} // ✅ disable after buying
+                            disabled={isBought}
                             className={`btn btn-wide text-white border-none shadow-lg transition duration-300 ${isBought
                                     ? "bg-gray-400 cursor-not-allowed"
                                     : "bg-gradient-to-r from-green-500 via-blue-500 to-purple-600 hover:scale-105 hover:shadow-xl"
                                 }`}
                         >
-                            {isBought ? "The Property is Yours" : "Buy This Property"}
+                            {isBought ? "The Property is Yours ✅" : "Buy This Property"}
                         </button>
                     </div>
                 </div>
 
-                {/* Right - Seller Info */}
+                {/* Seller Info */}
                 <div data-aos="fade-left" className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition">
                     <h2 className="text-2xl font-semibold text-gray-800 mb-4">Seller Information</h2>
                     <div className="flex flex-col items-center text-center">

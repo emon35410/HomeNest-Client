@@ -34,7 +34,7 @@ const Login = () => {
     };
 
     const handleGoogleSignIn = () => {
-        if (googleLoading) return; // prevent duplicate clicks
+        if (googleLoading) return;
         setGoogleLoading(true);
 
         signInGoogle()
@@ -68,7 +68,7 @@ const Login = () => {
                     toast.error(error.message || "Something went wrong");
                 }
             })
-            .finally(() => setGoogleLoading(false)); // always reset loading
+            .finally(() => setGoogleLoading(false)); 
     };
 
     useEffect(() => {

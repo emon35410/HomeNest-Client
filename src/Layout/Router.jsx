@@ -10,6 +10,8 @@ import PropertiesDetails from '../Component/PropertiesDetails/PropertiesDetails'
 import Login from '../Component/Account/Login';
 import ErrorPage from '../Component/ErrorPage/ErrorPage';
 import Signup from '../Component/Account/Signup';
+import PrivateRoute from '../Component/PrivateRoute/PrivateRoute';
+import MyPropertyDeailts from '../Component/MyProperties/MyPropertyDeailts';
 
 
 
@@ -18,7 +20,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         Component: Root,
-        errorElement:<ErrorPage></ErrorPage>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 index: true,
@@ -35,30 +37,44 @@ const router = createBrowserRouter([
             },
             {
                 path: "addproperties",
-                element: <AddProperties></AddProperties>
+                element: <PrivateRoute>
+                    <AddProperties></AddProperties>
+                </PrivateRoute>
             },
             {
                 path: "myproperties",
-                element: <MyProperties></MyProperties>
+                element: <PrivateRoute>
+                    <MyProperties></MyProperties>
+                </PrivateRoute>
             },
             {
                 path: "myratings",
-                element: <MyRatings></MyRatings>
+                element: <PrivateRoute>
+                    <MyRatings></MyRatings>
+                </PrivateRoute>
             },
             {
-                path:"homes/:id",
-                loader: ({params})=>fetch(`http://localhost:3000/homes/${params.id}`),
-                element:<PropertiesDetails></PropertiesDetails>
+                path: "homes/:id",
+                loader: ({ params }) => fetch(`http://localhost:3000/homes/${params.id}`),
+                element: <PropertiesDetails></PropertiesDetails>
+            },
+            {
+                path: "/myproperties/:id",
+                element: <PrivateRoute>
+                    <MyPropertyDeailts></MyPropertyDeailts>
+                </PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:3000/myproperties/${params.id}`),
             }
+
         ]
     },
     {
-        path:"/login",
-        Component:Login
+        path: "/login",
+        Component: Login
     },
     {
-        path:"/signup",
-        Component:Signup
+        path: "/signup",
+        Component: Signup
     }
 
 ]);

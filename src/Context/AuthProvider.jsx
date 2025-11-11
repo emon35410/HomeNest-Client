@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
 
     }
     if (loading) {
-        // optional: show a loader while checking auth
+        
         return <div className='flex justify-center items-center'><Commet color="#32cd32" size="medium" text="Homenest" textColor="" /></div>;
     }
     return (

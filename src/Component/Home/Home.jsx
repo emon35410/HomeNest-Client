@@ -16,6 +16,8 @@ const Home = () => {
             once: true,
         });
     }, []);
+    
+    
     const recentHomePromise = fetch("http://localhost:3000/recent-homes").then(res => res.json()).then(data => {
 
         return data;
