@@ -3,10 +3,11 @@ import { Link, useNavigate } from 'react-router';
 import { NavLink } from 'react-router';
 import "./Navbar.css"
 import { AuthContext } from '../../Context/AuthContext';
+import { Commet } from 'react-loading-indicators';
 
 const Navbar = () => {
 
-    const { user, logOut, setLoading } = useContext(AuthContext);
+    const { user, logOut, loading, setLoading } = useContext(AuthContext);
     const navigate = useNavigate()
     const handleLogOut = () => {
         logOut()
@@ -30,6 +31,15 @@ const Navbar = () => {
             </>
         }
     </>
+    if (loading) {
+        return (
+            <div className="navbar bg-base-100 shadow-sm">
+                <div className="navbar-center">
+                   <Commet color="#32cd32" size="medium" text="Homenest" textColor="" />
+                </div>
+            </div>
+        );
+    }
     return (
         <div>
             <div className="navbar bg-base-100 shadow-sm">
@@ -44,7 +54,7 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">HomeNest</a>
+                    <a href='/' className="btn text-blue-600 btn-ghost text-xl">HomeNest</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -57,10 +67,11 @@ const Navbar = () => {
                             <div className="dropdown dropdown-end  ">
                                 <div tabIndex={0} role="button" className="w-12 h-12">
                                     <img
-                                        className="rounded-full hover:cursor-pointer w-full h-full object-cover"
-                                        src={user.photoURL || "/default-avatar.png"}
+                                        className="rounded-full hover:cursor-pointer w-12 h-12 object-cover"
+                                        src={user.photoURL ? user.photoURL : "/default-avatar.png"}
                                         alt={user.displayName || "User"}
                                     />
+
                                 </div>
 
 
