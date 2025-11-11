@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Navbar from '../Navbar/Navbar';
@@ -8,38 +8,59 @@ import { AuthContext } from '../../Context/AuthContext';
 import { toast } from 'react-toastify';
 
 const Login = () => {
-    const { signInGoogle } = useContext(AuthContext);
+    const { signInGoogle, signInUser } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [formData, setFormData] = useState({ email: '', password: '' });
 
-    const handleGoogleSignIn = async () => {
-        try {
-            const result = await signInGoogle();
-            const newUser = {
-                name: result.user.displayName,
-                email: result.user.email,
-                photoURL: result.user.photoURL
-            };
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
-            const res = await fetch("http://localhost:3000/users", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(newUser)
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const { email, password } = formData;
+
+        signInUser(email, password)
+            .then(result => {
+                console.log("User logged in:", result.user);
+                toast.success("Login successful!");
+                navigate("/");
+            })
+            .catch(error => {
+                console.error("Login error:", error);
+                toast.error(error.message);
             });
+    };
 
-            const data = await res.json();
-            console.log("After saving user data:", data);
+    const handleGoogleSignIn = () => {
+        signInGoogle()
+            .then(result => {
+                const newUser = {
+                    name: result.user.displayName,
+                    email: result.user.email,
+                    photoURL: result.user.photoURL
+                };
 
-            if (data.success) {
-                navigate("/"); 
-            } else {
-                // alert(data.message);
-                toast.success("Succesfully Login")
-                navigate("/"); 
-            }
-
-        } catch (error) {
-            console.error("Error saving user:", error);
-        }
+                fetch("http://localhost:3000/users", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(newUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log("After saving user data:", data);
+                        toast.success("Successfully logged in");
+                        navigate("/");
+                    })
+                    .catch(err => {
+                        console.error("Error saving user:", err);
+                        toast.error("Something went wrong");
+                    });
+            })
+            .catch(error => {
+                console.error("Google Sign In error:", error);
+                toast.error(error.message);
+            });
     };
 
     useEffect(() => {
@@ -56,12 +77,15 @@ const Login = () => {
                             Welcome Back
                         </h2>
 
-                        <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                        <form className="space-y-4" onSubmit={handleSubmit}>
                             <div>
                                 <label className="block text-gray-700 dark:text-gray-300 text-sm sm:text-base">Email</label>
                                 <input
                                     type="email"
                                     name='email'
+                                    value={formData.email}
+                                    onChange={handleChange}
+
                                     placeholder="Enter Your Email"
                                     className="w-full mt-1 p-2 sm:p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
                                 />
@@ -72,6 +96,8 @@ const Login = () => {
                                 <input
                                     type="password"
                                     name='password'
+                                    value={formData.password}
+                                    onChange={handleChange}
                                     placeholder="Enter Your Password"
                                     className="w-full mt-1 p-2 sm:p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
                                 />

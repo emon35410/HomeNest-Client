@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import React, { useEffect } from 'react';
 import { auth } from '../Firebase/Firebase.init';
 import { useState } from 'react';
@@ -24,6 +24,13 @@ const AuthProvider = ({ children }) => {
         setLoading(true)
         return signOut(auth);
     }
+     const updateUserProfile = (profileInfo) => {
+        if (auth.currentUser) {
+            return updateProfile(auth.currentUser, profileInfo);
+        }
+        return Promise.reject("No user is currently logged in");
+    };
+
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth,(currentUser)=>{
             setUser(currentUser);
@@ -38,7 +45,9 @@ const AuthProvider = ({ children }) => {
         signInUser,
         signInGoogle,
         logOut,
+        updateUserProfile,
         user,
+        setUser,
         loading
 
     }
