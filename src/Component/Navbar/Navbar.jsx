@@ -4,6 +4,9 @@ import { NavLink } from 'react-router';
 import "./Navbar.css"
 import { AuthContext } from '../../Context/AuthContext';
 import { Commet } from 'react-loading-indicators';
+import DarkModeToggle from '../Theme/DarkMoodToggle';
+
+
 
 const Navbar = () => {
 
@@ -52,13 +55,16 @@ const Navbar = () => {
                             tabIndex="-1"
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                             {links}
+                            
                         </ul>
                     </div>
                     <a href='/' className="btn text-blue-600 btn-ghost text-xl">HomeNest</a>
                 </div>
+             <div><DarkModeToggle></DarkModeToggle></div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         {links}
+                        
                     </ul>
                 </div>
                 <div className="navbar-end">
