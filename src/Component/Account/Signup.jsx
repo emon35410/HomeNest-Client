@@ -1,24 +1,47 @@
-import React, {  useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../../Context/AuthContext';
 
 
 const Signup = () => {
-    const {signInGoogle} = useContext(AuthContext);
+    const { signInGoogle } = useContext(AuthContext);
+    const navigate = useNavigate();
 
-    const handleGoogleSignIn = ()=>{
-        signInGoogle()
-        .then(result=>{
-            console.log(result.user)
-        })
-        .catch(error=>{
-            console.log(error)
-        })
-    }
+    const handleGoogleSignIn = async () => {
+        try {
+            const result = await signInGoogle();
+            const newUser = {
+                name: result.user.displayName,
+                email: result.user.email,
+                photoURL: result.user.photoURL
+            };
+
+            const res = await fetch("http://localhost:3000/users", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(newUser)
+            });
+
+            const data = await res.json();
+            console.log("After saving user data:", data);
+
+            if (data.success) {
+                navigate("/"); // user created
+            } else {
+                alert(data.message); // "Already Have an Account"
+                navigate("/"); // optional: navigate even if user exists
+            }
+
+        } catch (error) {
+            console.error("Error saving user:", error);
+        }
+    };
+
+
     useEffect(() => {
         AOS.init({ duration: 800, once: true });
     }, []);

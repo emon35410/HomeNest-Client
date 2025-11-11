@@ -1,12 +1,24 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { NavLink } from 'react-router';
 import "./Navbar.css"
 import { AuthContext } from '../../Context/AuthContext';
 
 const Navbar = () => {
 
-    const { user } = useContext(AuthContext);
+    const { user, logOut, setLoading } = useContext(AuthContext);
+    const navigate = useNavigate()
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+                setLoading(false);
+                navigate("/login")
+            })
+            .catch((error) => {
+                console.error("Logout error:", error);
+                setLoading(false);
+            });
+    }
     const links = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/allproperties">All Properties</NavLink></li>
@@ -42,14 +54,15 @@ const Navbar = () => {
                 <div className="navbar-end">
                     {
                         user ? (
-                            <div className="dropdown dropdown-end ">
-                                <div tabIndex={0} role="button" className="w-20">
+                            <div className="dropdown dropdown-end  ">
+                                <div tabIndex={0} role="button" className="w-12 h-12">
                                     <img
-                                        className="rounded-full hover:cursor-pointer w-15 h-15 object-cover"
-                                        src={user.photoURL}
+                                        className="rounded-full hover:cursor-pointer w-full h-full object-cover"
+                                        src={user.photoURL || "/default-avatar.png"}
                                         alt={user.displayName || "User"}
                                     />
                                 </div>
+
 
                                 <ul
                                     tabIndex="-1"
@@ -58,7 +71,7 @@ const Navbar = () => {
                                     <li><h1 className="font-semibold">{user.displayName}</h1></li>
                                     <li><h1 className="text-sm text-gray-500">{user.email}</h1></li>
                                     <li>
-                                        <Link to="/login" className="btn btn-outline btn-primary mt-2">
+                                        <Link to="/login" onClick={handleLogOut} className="btn btn-outline btn-primary mt-2">
                                             Log Out
                                         </Link>
                                     </li>

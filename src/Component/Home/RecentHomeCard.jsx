@@ -11,9 +11,9 @@ const RecentHomeCard = ({ recentHomePromise }) => {
         <div className='w-11/12 mx-auto my-7'>
             <h1 className='text-center text-4xl my-10 font-bold'>Our Recent Residence</h1>
             <div className='flex flex-wrap justify-center gap-6'>
-                {RecentHome.map(Home => (
+                {RecentHome.map((Home,index) => (
                     <div data-aos="fade-up"
-                        key={Home.id}
+                        key={index}
                         className="w-[350px] h-[520px] rounded-2xl overflow-hidden shadow-xl bg-[#F5E9E0]"
                     >
                         <img

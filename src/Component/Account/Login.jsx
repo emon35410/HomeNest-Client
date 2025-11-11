@@ -1,11 +1,47 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import { AuthContext } from '../../Context/AuthContext';
+import { toast } from 'react-toastify';
 
 const Login = () => {
+    const { signInGoogle } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleGoogleSignIn = async () => {
+        try {
+            const result = await signInGoogle();
+            const newUser = {
+                name: result.user.displayName,
+                email: result.user.email,
+                photoURL: result.user.photoURL
+            };
+
+            const res = await fetch("http://localhost:3000/users", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(newUser)
+            });
+
+            const data = await res.json();
+            console.log("After saving user data:", data);
+
+            if (data.success) {
+                navigate("/"); 
+            } else {
+                // alert(data.message);
+                toast.success("Succesfully Login")
+                navigate("/"); 
+            }
+
+        } catch (error) {
+            console.error("Error saving user:", error);
+        }
+    };
+
     useEffect(() => {
         AOS.init({ duration: 800, once: true });
     }, []);
@@ -20,7 +56,7 @@ const Login = () => {
                             Welcome Back
                         </h2>
 
-                        <form className="space-y-4">
+                        <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
                             <div>
                                 <label className="block text-gray-700 dark:text-gray-300 text-sm sm:text-base">Email</label>
                                 <input
@@ -56,14 +92,14 @@ const Login = () => {
 
                         <p className="mt-4 text-center text-gray-600 dark:text-gray-300 text-sm">
                             Don't have an account?{' '}
-                            <span  className="text-blue-600 dark:text-blue-400 font-semibold cursor-pointer hover:underline">
+                            <span className="text-blue-600 dark:text-blue-400 font-semibold cursor-pointer hover:underline">
                                 <Link to="/signup">Sign Up</Link>
                             </span>
                         </p>
 
                         <div className="mt-6 text-center">
                             <p className="text-gray-500 dark:text-gray-400 mb-2 text-sm">Or login with</p>
-                            <button className="flex hover:cursor-pointer items-center justify-center gap-2 w-full py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors font-medium shadow-sm">
+                            <button onClick={handleGoogleSignIn} className="flex hover:cursor-pointer items-center justify-center gap-2 w-full py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors font-medium shadow-sm">
                                 <svg
                                     aria-label="Google logo"
                                     width="20"
