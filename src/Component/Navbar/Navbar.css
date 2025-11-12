@@ -8,7 +8,7 @@ a.active {
 }
 
 a.active {
-  -webkit-text-fill-color: #ba238a91; /* solid purple */
+  -webkit-text-fill-color: #ba238a91;
   font-weight: 600;
   border-bottom: 2px solid #9F62F2;
   background: none;

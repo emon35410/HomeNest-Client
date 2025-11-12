@@ -18,7 +18,6 @@ const AllProperties = () => {
     }, []);
 
     useEffect(() => {
-        // Filter Homes based on property_name
         const filtered = Homes.filter((home) =>
             home.property_name.toLowerCase().includes(searchTerm.toLowerCase())
         );
@@ -31,11 +30,11 @@ const AllProperties = () => {
                 Our Recent Residence ({filteredHomes.length})
             </h1>
 
-            {/* Search Input */}
+            
             <div className="flex justify-center mb-8">
                 <input
                     type="text"
-                    placeholder="Search by Property Name..."
+                    placeholder="Search..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="w-full max-w-md p-3 border rounded-xl focus:ring-2 focus:ring-blue-500"

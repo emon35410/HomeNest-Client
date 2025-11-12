@@ -68,7 +68,7 @@ const Login = () => {
                     toast.error(error.message || "Something went wrong");
                 }
             })
-            .finally(() => setGoogleLoading(false)); 
+            .finally(() => setGoogleLoading(false));
     };
 
     useEffect(() => {
@@ -137,8 +137,8 @@ const Login = () => {
                                 onClick={handleGoogleSignIn}
                                 disabled={googleLoading}
                                 className={`flex items-center justify-center gap-2 w-full py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 font-medium shadow-sm transition ${googleLoading
-                                        ? "opacity-60 cursor-not-allowed"
-                                        : "hover:bg-gray-100 dark:hover:bg-gray-600"
+                                    ? "opacity-60 cursor-not-allowed"
+                                    : "hover:bg-gray-100 dark:hover:bg-gray-600"
                                     }`}
                             >
                                 {googleLoading ? (

@@ -23,18 +23,14 @@ const RecentHomeCard = ({ recentHomePromise }) => {
                         />
 
                         <div className="p-5">
-                            {/* Category */}
+                            
                             <h1 className='text-center text-[#3D2A23] text-2xl font-semibold my-3'>
                                 {Home.property_name}
                             </h1>
-
-                            {/* Location */}
                             <div className="flex justify-center items-center gap-2 text-[#3D2A23] mb-3">
                                 <FaLocationDot className="text-[#3D2A23] text-lg" />
                                 <span className="text-lg font-semibold">{Home.location}</span>
                             </div>
-
-                            {/* Details */}
                             <div className='flex gap-8 items-center justify-center text-[#3D2A23] mb-3'>
                                 <div className="flex items-center gap-2">
                                     <MdBedroomChild className="text-xl" />
@@ -45,8 +41,6 @@ const RecentHomeCard = ({ recentHomePromise }) => {
                                     <span>{Home.area_sqft} ft²</span>
                                 </div>
                             </div>
-
-                            {/* Price */}
                             <p className="text-xl text-center font-semibold text-[#3D2A23] mt-3">
                                 Price: <span className="font-bold">${Home.price}</span>
                             </p>

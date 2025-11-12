@@ -20,7 +20,6 @@ const MyProperties = () => {
         description: "",
     });
 
-    // Fetch my properties
     useEffect(() => {
         if (user?.email) {
             fetch(`http://localhost:3000/myproperties?email=${user.email}`)
@@ -33,7 +32,6 @@ const MyProperties = () => {
         }
     }, [user?.email]);
 
-    // Delete property
     const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -59,7 +57,6 @@ const MyProperties = () => {
         });
     };
 
-    // Open modal 
     const openUpdateModal = (property) => {
         setCurrentProperty(property);
         setUpdateData({
@@ -115,7 +112,7 @@ const MyProperties = () => {
         <div className="max-w-6xl mx-auto px-4 py-10">
             <h1 className="text-3xl font-bold mb-6 text-center">🏡 My Properties</h1>
 
-            
+
             <div className="overflow-x-auto shadow-md rounded-xl">
                 <table className="table-auto w-full min-w-[600px]">
                     <thead className="bg-gradient-to-r from-green-500 via-blue-500 to-purple-600 text-white">
@@ -166,7 +163,7 @@ const MyProperties = () => {
                 </table>
             </div>
 
-            {/* Update Modal */}
+
             {showModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
                     <div className="bg-white p-6 rounded-xl w-full max-w-lg overflow-y-auto max-h-[90vh]">
