@@ -16,7 +16,8 @@ const AddProperties = () => {
         bedrooms: '',
         bathrooms: '',
         area_sqft: '',
-        image: ''
+        image: '',
+        seller_contact: ''
     });
 
     if (!user) {
@@ -58,7 +59,8 @@ const AddProperties = () => {
                     bedrooms: '',
                     bathrooms: '',
                     area_sqft: '',
-                    image: ''
+                    image: '',
+                    seller_contact: ''
                 });
             })
             .catch(err => {
@@ -214,6 +216,18 @@ const AddProperties = () => {
                                 value={user.email}
                                 readOnly
                                 className="w-full mt-1 p-2 border rounded-lg bg-gray-200 dark:bg-gray-600 text-gray-900 dark:text-gray-100"
+                            />
+                        </div>
+                        <div className="md:col-span-2">
+                            <label className="block text-gray-700 dark:text-gray-300">Seller Contact</label>
+                            <input
+                                type="text"
+                                name="seller_contact"
+                                value={formData.seller_contact}
+                                onChange={handleChange}
+                                placeholder="Enter your contact number"
+                                className="w-full mt-1 p-2 border rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500"
+                                required
                             />
                         </div>
                     </div>
