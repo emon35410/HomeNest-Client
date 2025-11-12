@@ -56,7 +56,9 @@ const router = createBrowserRouter([
             {
                 path: "homes/:id",
                 loader: ({ params }) => fetch(`https://home-nest-server-mauve.vercel.app/homes/${params.id}`),
-                element: <PropertiesDetails></PropertiesDetails>
+                element: <PrivateRoute>
+                    <PropertiesDetails></PropertiesDetails>
+                </PrivateRoute>
             },
             {
                 path: "/myproperties/:id",
