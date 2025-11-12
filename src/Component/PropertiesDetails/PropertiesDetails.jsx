@@ -14,7 +14,7 @@ const PropertiesDetails = () => {
 
 
   const loadReviews = () => {
-    fetch(`http://localhost:3000/reviews/property/${home._id}`)
+    fetch(`https://home-nest-server-mauve.vercel.app/reviews/property/${home._id}`)
       .then((res) => res.json())
       .then((data) => setReviews(data))
       .catch((err) => console.error("Error loading reviews:", err));
@@ -50,7 +50,7 @@ const PropertiesDetails = () => {
           buyer_email: user?.email || "unknown",
           date: new Date().toISOString(),
         };
-        fetch("http://localhost:3000/myproperties", {
+        fetch("https://home-nest-server-mauve.vercel.app/myproperties", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(myProperty),
@@ -81,7 +81,7 @@ const PropertiesDetails = () => {
       review_text: e.target.review.value,
       date: new Date().toISOString(),
     };
-    fetch("http://localhost:3000/reviews", {
+    fetch("https://home-nest-server-mauve.vercel.app/reviews", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newReview),

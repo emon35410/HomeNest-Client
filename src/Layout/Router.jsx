@@ -29,7 +29,7 @@ const router = createBrowserRouter([
             {
                 path: "allproperties",
                 loader: async () => {
-                    const res = await fetch("http://localhost:3000/homes");
+                    const res = await fetch("https://home-nest-server-mauve.vercel.app/homes");
                     return res.json();
                 },
 
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "homes/:id",
-                loader: ({ params }) => fetch(`http://localhost:3000/homes/${params.id}`),
+                loader: ({ params }) => fetch(`https://home-nest-server-mauve.vercel.app/homes/${params.id}`),
                 element: <PropertiesDetails></PropertiesDetails>
             },
             {
@@ -63,7 +63,7 @@ const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <MyPropertyDeailts></MyPropertyDeailts>
                 </PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:3000/myproperties/${params.id}`),
+                loader: ({ params }) => fetch(`https://home-nest-server-mauve.vercel.app/myproperties/${params.id}`),
             }
 
         ]

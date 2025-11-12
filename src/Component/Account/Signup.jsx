@@ -63,7 +63,7 @@ const Signup = () => {
                     setUser(userData);
 
 
-                    return fetch("http://localhost:3000/users", {
+                    return fetch("https://home-nest-server-mauve.vercel.app/users", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(userData)
@@ -94,7 +94,7 @@ const Signup = () => {
 
                 setUser(userData);
 
-                return fetch("http://localhost:3000/users", {
+                return fetch("https://home-nest-server-mauve.vercel.app/users", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(userData)

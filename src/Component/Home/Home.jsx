@@ -18,7 +18,7 @@ const Home = () => {
     }, []);
     
     
-    const recentHomePromise = fetch("http://localhost:3000/recent-homes").then(res => res.json()).then(data => {
+    const recentHomePromise = fetch("https://home-nest-server-mauve.vercel.app/recent-homes").then(res => res.json()).then(data => {
 
         return data;
 

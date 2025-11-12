@@ -42,7 +42,7 @@ const AddProperties = () => {
             seller_contact: user.phoneNumber || ""
         };
 
-        fetch("http://localhost:3000/homes", {
+        fetch("https://home-nest-server-mauve.vercel.app/homes", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newHome)

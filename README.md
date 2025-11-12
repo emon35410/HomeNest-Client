@@ -1,16 +1,11 @@
-# React + Vite
+Live Link: https://home-nest-mhe.netlify.app/
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. Real Estate Platform: HomeNest is a web application for buying, selling, and renting properties such as homes, apartments, and land.
 
-Currently, two official plugins are available:
+2. User-Based System: Users can sign up, log in, add their own property listings, and manage their personal dashboard.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+3. Reviews & Ratings: Each property supports user reviews and ratings to help buyers make informed decisions.
 
-## React Compiler
+4. MERN Stack Project: Built using MongoDB, Express.js, React, and Node.js, with deployment on Vercel.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+5. Fully Responsive Design: Optimized for all screen sizes with a modern UI, smooth navigation, and dynamic property management.

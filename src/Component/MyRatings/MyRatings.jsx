@@ -10,7 +10,7 @@ const MyRatings = () => {
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:3000/reviews?reviewer_email=${user.email}`)
+            fetch(`https://home-nest-server-mauve.vercel.app/reviews?reviewer_email=${user.email}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)

@@ -22,7 +22,7 @@ const MyProperties = () => {
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:3000/myproperties?email=${user.email}`)
+            fetch(`https://home-nest-server-mauve.vercel.app/myproperties?email=${user.email}`)
                 .then((res) => res.json())
                 .then((data) => {
                     setProperties(data);
@@ -43,7 +43,7 @@ const MyProperties = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/myproperties/${id}`, {
+                fetch(`https://home-nest-server-mauve.vercel.app/myproperties/${id}`, {
                     method: "DELETE",
                 })
                     .then((res) => res.json())
@@ -75,7 +75,7 @@ const MyProperties = () => {
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:3000/myproperties/${currentProperty._id}`, {
+        fetch(`https://home-nest-server-mauve.vercel.app/myproperties/${currentProperty._id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(updateData),
